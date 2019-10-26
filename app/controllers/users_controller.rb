@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       token = JWT.encode(payload, 'okcool', 'HS256')
       render json: {token: token}
     else 
-      render json: newUser.errors 
+      render json: newUser.errors.full_messages
     end 
   end 
 
