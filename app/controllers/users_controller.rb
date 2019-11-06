@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       token = JWT.encode(payload, 'okcool', 'HS256')
       render json: {token: token}
     else 
-      render json: "Failed, wrong password."
+      render json: "Failed, wrong username/password."
     end 
   end 
 
@@ -22,7 +22,6 @@ class UsersController < ApplicationController
       render json: newUser.errors.full_messages
     end 
   end 
-
   def profile 
     decoded_token = JWT.decode(request.headers[:token], 'okcool', true, {algorithm: 'HS256'})
     foundProfile = User.find(decoded_token[0]["user"])
